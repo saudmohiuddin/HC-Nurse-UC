@@ -83,7 +83,7 @@ The routes.py file defines the different endpoints (routes) that the Flask appli
 
 Key Components:
 
-	1.	Route Definitions:
+ 1.	Route Definitions:
 Each route in Flask is defined using the @app.route() decorator, which binds a URL to a specific function. These routes allow interaction between the frontend and backend, handling tasks like rendering templates, receiving data submissions, and returning JSON responses.
 	
  2.	Home Page Route (GET):
