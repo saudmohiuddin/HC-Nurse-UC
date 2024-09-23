@@ -33,7 +33,7 @@ The models.py file is responsible for defining the structure of the data stored 
 
 Key Components:
 
-	1.	MongoDB Connection:
+  1.	MongoDB Connection:
 This connection allows the application to store patient details, nurse data, transcriptions, and audio summaries.
 
   2.	Patient Model:
