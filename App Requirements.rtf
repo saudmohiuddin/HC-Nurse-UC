@@ -1,0 +1,41 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue-Bold;\f1\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0\cname textColor;}
+\margl1440\margr1440\vieww26120\viewh10920\viewkind0
+\deftab560
+\pard\pardeftab560\pardirnatural\partightenfactor0
+
+\f0\b\fs36 \cf0 New requirements after Mongo integration (08/03/24):
+\f1\b0\fs26 \
+\
+	- 	
+\fs28 \cf2 Ok, I can see the recordings in mongo along with the fs files. We now need to make some adjustments to the html file. At the moment, when i submit the web form, it shows an html success code in a 		new page and redirects me from the web app. I do not want that. \
+		-	I want to stay in the web form after submitting the form\
+		-	i want to see a pop-up saying form submitted and not redirected to a new page\
+	-	I also want to see an option to choose a patient at the top of the form (list of existing patients from the db and an option to 'Add New Patient'). \
+		-	This should be a DB call listing existing patients or option to add a new one	\
+	-	Let\'92s also add an option next to the patient drop down called \'93Form Submission\'94 with radio buttons \'93AM\'94 and \'93PM\'94. These values need to be stored with the form data in the DB. So, when we are 	\
+		summarizing the information stored for that nurse\'92s shift, we know \'93when\'94 the form was submitted. Typically, the form will be submitted twice a day for a given nurse.\
+	- 	Let\'92s also add a \'93Nurse\'94 drop down, where a nurse can select himself/herself from the list before beginning the shift to enter patient data. If no nurse exist in the database, let\'92s give an option to add 		from the drop down. We need to make sure the Nurse entering the patient data (manual or audio) gets stored in the database for a given patient.\
+		-	We will make this Nurse selection a dependency of the Patient selection drop down\
+	-	The default behavior of the page should always be blank. This assumes, the nurse is expected to fill out the form or record an audio that will fill out the form in the backend and store in the db.\
+	-	With patient selected, any audio recordings for the day can be stored against that selected patient.\
+		- I should not be able to record any event when a patient from the drop down is NOT selected. Pressing the buttons should not be allowed or a message should 	\
+		appear, which ever is the best solution\
+	-	With the patient selected, I can also submit the form manually and the data can be stored in the database accordingly. 
+\fs26 \cf0 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\b\fs28 \cf2 Need to fix a few things.
+\f1\b0 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 1. Add a new nurse needs to give me the ability to add a Nurse with First name Last name and Nurse ID. The nurse ID must be used to track the patients a nurse cared for and the data entered for those patients by that nurse. There should be a submit button after entering the nurse info to store in the database (need to update DB schema?)\
+2. Add New Patient will use the empty form below and the nurse can either fill in the form manually, or record an audio which will fill out a new patient in the database based on the audio to text generation.\
+3. Selecting a nurse from the list or creating a new one and by selecting a patient from the list or by creating a new one should allow me to click the two record buttons. Currently, if I select add a new nurse and add a new patient, i cannot access the record buttons.\
+4. The patient list show an existing patient and his/her DOB as it is in the database. This will prevent duplication patient data.\
+\
+\
+}

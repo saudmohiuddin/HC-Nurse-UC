@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flow Sheet Dictation - Oncology Nurse</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Flow Sheet Dictation - Oncology Nurse</h1>
+
+    <form id="healthForm">
+        <h2>Nurse and Patient Selection</h2>
+        <label for="nurseSelect">Select Nurse:</label>
+        <select id="nurseSelect" name="nurse_id" required>
+            <option value="">--Select Nurse--</option>
+            <option value="add_new">Add New Nurse</option>
+        </select>
+
+        <div id="newNurseFields" style="display: none;">
+            <input type="text" id="nurse_first_name" placeholder="First Name">
+            <input type="text" id="nurse_last_name" placeholder="Last Name">
+            <button id="addNurseButton">Add Nurse</button>
+        </div>
+
+        <label for="patientSelect">Select Patient:</label>
+        <select id="patientSelect" name="patient_id" required>
+            <option value="">--Select Patient--</option>
+            <option value="add_new">Add New Patient</option>
+        </select>
+
+        <div id="newPatientFields" style="display: none;">
+            <input type="text" id="patient_name" placeholder="Patient Name" required>
+            <input type="date" id="patient_dob" placeholder="Date of Birth" required>
+            <input type="text" id="patient_medical_history" placeholder="Medical History" required>
+        </div>
+
+        <h2>General Health and Well-being</h2>
+        <div id="patientInfoFields" style="display: none;">
+            <div class="field-group">
+                <label for="displayPatientMRN">MRN#:</label>
+                <input type="text" id="displayPatientMRN" readonly>
+            </div>
+            
+            <div class="field-group">
+                <label for="displayPatientAge">Age:</label>
+                <input type="text" id="displayPatientAge" readonly>
+            </div>
+            
+            <div class="field-group">
+                <label for="displayPatientMedicalHistory">Diagnosis:</label>
+                <input type="text" id="displayPatientMedicalHistory" readonly>
+            </div>
+        </div>
+
+        <label for="feeling">How are you feeling today?</label>
+        <select id="feeling" name="response_feeling">
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+            <option value="Poor">Poor</option>
+            <option value="Very Poor">Very Poor</option>
+        </select>
+
+        <label for="pain">Do you have any pain? If yes, where and how severe?</label>
+        <input type="text" id="pain" name="response_pain">
+
+        <fieldset>
+            <legend>Pain Level (0-10):</legend>
+            <input type="radio" id="pain0" name="response_pain_level" value="0"><label for="pain0">0</label>
+            <input type="radio" id="pain1" name="response_pain_level" value="1"><label for="pain1">1</label>
+            <input type="radio" id="pain2" name="response_pain_level" value="2"><label for="pain2">2</label>
+            <input type="radio" id="pain3" name="response_pain_level" value="3"><label for="pain3">3</label>
+            <input type="radio" id="pain4" name="response_pain_level" value="4"><label for="pain4">4</label>
+            <input type="radio" id="pain5" name="response_pain_level" value="5"><label for="pain5">5</label>
+            <input type="radio" id="pain6" name="response_pain_level" value="6"><label for="pain6">6</label>
+            <input type="radio" id="pain7" name="response_pain_level" value="7"><label for="pain7">7</label>
+            <input type="radio" id="pain8" name="response_pain_level" value="8"><label for="pain8">8</label>
+            <input type="radio" id="pain9" name="response_pain_level" value="9"><label for="pain9">9</label>
+            <input type="radio" id="pain10" name="response_pain_level" value="10"><label for="pain10">10</label>
+        </fieldset>
+
+        <label for="ao">A&O times 3 (Alert, Oriented to time, place and who):</label>
+        <input type="text" id="ao" name="response_ao">
+
+        <label for="admission_reason">Reason for Admission:</label>
+        <input type="text" id="admission_reason" name="response_admission_reason">
+
+        <h2>Chemotherapy Side Effects</h2>
+        <label for="nausea">Have you experienced any nausea or vomiting today?</label>
+        <select id="nausea" name="response_nausea">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="fatigue">Are you experiencing any fatigue or weakness?</label>
+        <select id="fatigue" name="response_fatigue">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <h2>Intake and Output</h2>
+        <label for="water_intake">How much water have you consumed today?</label>
+        <select id="water_intake" name="response_water_intake">
+            <option value="<500ml"><500ml</option>
+            <option value="500-1000ml">500-1000ml</option>
+            <option value=">1000ml">>1000ml</option>
+        </select>
+
+        <label for="urination">How much did you urinate today? Measured in ML.</label>
+        <input type="number" id="urination" name="response_urination">
+
+        <label for="bowel_movement">How many times did you have any bowel movement?</label>
+        <select id="bowel_movement" name="response_bowel_movement">
+            <option value="Small">Small</option>
+            <option value="Medium">Medium</option>
+            <option value="Large">Large</option>
+        </select>
+
+        <fieldset>
+            <legend>How much did you eat today? Measured in % per meal.</legend>
+            <div>
+                <label>Breakfast:</label>
+                <input type="radio" id="breakfast0" name="response_breakfast" value="0%"><label for="breakfast0">0%</label>
+                <input type="radio" id="breakfast25" name="response_breakfast" value="25%"><label for="breakfast25">25%</label>
+                <input type="radio" id="breakfast50" name="response_breakfast" value="50%"><label for="breakfast50">50%</label>
+                <input type="radio" id="breakfast75" name="response_breakfast" value="75%"><label for="breakfast75">75%</label>
+                <input type="radio" id="breakfast100" name="response_breakfast" value="100%"><label for="breakfast100">100%</label>
+            </div>
+            <div>
+                <label>Lunch:</label>
+                <input type="radio" id="lunch0" name="response_lunch" value="0%"><label for="lunch0">0%</label>
+                <input type="radio" id="lunch25" name="response_lunch" value="25%"><label for="lunch25">25%</label>
+                <input type="radio" id="lunch50" name="response_lunch" value="50%"><label for="lunch50">50%</label>
+                <input type="radio" id="lunch75" name="response_lunch" value="75%"><label for="lunch75">75%</label>
+                <input type="radio" id="lunch100" name="response_lunch" value="100%"><label for="lunch100">100%</label>
+            </div>
+            <div>
+                <label>Dinner:</label>
+                <input type="radio" id="dinner0" name="response_dinner" value="0%"><label for="dinner0">0%</label>
+                <input type="radio" id="dinner25" name="response_dinner" value="25%"><label for="dinner25">25%</label>
+                <input type="radio" id="dinner50" name="response_dinner" value="50%"><label for="dinner50">50%</label>
+                <input type="radio" id="dinner75" name="response_dinner" value="75%"><label for="dinner75">75%</label>
+                <input type="radio" id="dinner100" name="response_dinner" value="100%"><label for="dinner100">100%</label>
+            </div>
+        </fieldset>
+
+        <h2>Situational and Emergency Conditions</h2>
+        <label for="falls_dizziness">Have you had any falls or felt dizzy today?</label>
+        <select id="falls_dizziness" name="response_falls_dizziness">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="unusual_symptoms">Are you experiencing any unusual symptoms or side effects that concern you?</label>
+        <input type="text" id="unusual_symptoms" name="response_unusual_symptoms">
+
+        <h2>Medication Administration</h2>
+        <div>
+            <input type="checkbox" id="acyclovir" name="medication_Acyclovir"><label for="acyclovir">Acyclovir</label>
+        </div>
+        <div>
+            <input type="checkbox" id="prednisone" name="medication_Prednisone"><label for="prednisone">Prednisone</label>
+        </div>
+        <div>
+            <input type="checkbox" id="insulin" name="medication_Insulin"><label for="insulin">Insulin</label>
+        </div>
+        <div>
+            <input type="checkbox" id="gabopantin" name="medication_Gabopantin"><label for="gabopantin">Gabopantin</label>
+        </div>
+        <div>
+            <input type="checkbox" id="neurontin" name="medication_Neurontin"><label for="neurontin">Neurontin</label>
+        </div>
+        <div>
+            <input type="checkbox" id="oxycodone" name="medication_Oxycodone"><label for="oxycodone">Oxycodone</label>
+        </div>
+        <div>
+            <input type="checkbox" id="morphine" name="medication_Morphine"><label for="morphine">Morphine</label>
+        </div>
+
+        <div id="audio-transcriptions">
+            <h2>Audio Transcriptions and Summaries</h2>
+            <!-- Dynamic content will be inserted here by JavaScript -->
+        
+            <div id="end-of-day-summary">
+                <h3>End of Day Summary</h3>
+                <p>This is a comprehensive summary of all recordings and notable events from the day...</p>
+            </div>
+        </div>
+
+        <div id="shift-selection">
+            <label>Shift:</label>
+            <input type="radio" id="shift-am" name="shift" value="AM" required>
+            <label for="shift-am">AM</label>
+            <input type="radio" id="shift-pm" name="shift" value="PM" required>
+            <label for="shift-pm">PM</label>
+        </div>
+
+        <button type="button" id="mainActionButton">Submit Form</button>
+    </form>
+
+    <h2>Audio Recording</h2>
+    <button id="record_event_note">Record Event Note</button>
+    <button id="record_flow_sheet">Record Flow Sheet</button>
+    
+    <div id="recordingModal" class="modal">
+        <div class="modal-content">
+            <h2 id="recordingTitle"></h2>
+            <canvas id="waveform"></canvas>
+            <button id="startStop" class="record-btn">Start Recording</button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/recording.js') }}"></script>
+</body>
+</html>

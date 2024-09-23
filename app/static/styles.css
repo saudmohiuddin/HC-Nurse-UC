@@ -1,0 +1,147 @@
+/* Styles for new patient fields */
+body {
+    background-image: url('./nurse_app_background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#newPatientFields .required-field {
+    border: 1px solid #ccc;
+}
+
+#newPatientFields .required-field.invalid {
+    border: 2px solid #ff6666;
+    background-color: #ffeeee;
+}
+
+#newPatientFields.highlight-required .required-field.invalid {
+    background-color: #ffeeee;
+}
+
+/* Styles for patient info fields */
+#patientInfoFields {
+    max-width: 500px; /* Adjust this value as needed */
+    margin: 0 auto; /* Centers the container */
+}
+
+.field-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.field-group label {
+    width: 100px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.patient-info-input {
+    flex: 1;
+    max-width: 200px; /* Adjust this value to control the input width */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Styles for the generate summary button */
+#generateSummaryBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+}
+
+/* Make the Diagnosis field slightly wider */
+#displayPatientMedicalHistory {
+    max-width: 300px;
+}
+
+/* Styles for audio transcriptions */
+#audio-transcriptions {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.transcription-container {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.recording-info {
+    margin-bottom: 10px;
+}
+
+.transcription, .summary {
+    margin-bottom: 15px;
+}
+
+.verbatim-text, .summary-text {
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #eee;
+}
+
+#end-of-day-summary {
+    background-color: #e6f3ff;
+    padding: 15px;
+    margin-top: 30px;
+}
+
+.timestamp {
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Styles for modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #f0f8ff; /* Light blue background */
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+#waveform {
+    width: 100%;
+    height: 100px;
+    background-color: #e6f3ff; /* Lighter blue for waveform background */
+}
+
+/* Styles for record buttons */
+.record-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin: 10px 5px;
+}
+
+.start {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.stop {
+    background-color: #f44336; /* Red */
+    color: white;
+}

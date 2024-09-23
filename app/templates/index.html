@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flow Sheet Dictation - Oncology Nurse</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="bg-light">
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Flow Sheet Dictation - Oncology Nurse</h1>
+
+        <form id="healthForm">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Nurse and Patient Selection</h2>
+                    <div class="row mb-3">
+                        <label for="nurseSelect" class="form-label col-sm-3">Select Nurse:</label>
+                        <div class="col-sm-9">
+                            <select id="nurseSelect" class="form-select" name="nurse_id" required>
+                                <option value="">--Select Nurse--</option>
+                                <option value="add_new">Add New Nurse</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="newNurseFields" class="row mb-3" style="display: none;">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control mb-2" id="nurse_first_name" placeholder="First Name">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control mb-2" id="nurse_last_name" placeholder="Last Name">
+                        </div>
+                        <div class="col-12">
+                            <button id="addNurseButton" class="btn btn-outline-primary">Add Nurse</button>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="patientSelect" class="form-label col-sm-3">Select Patient:</label>
+                        <div class="col-sm-9">
+                            <select id="patientSelect" class="form-select" name="patient_id" required>
+                                <option value="">--Select Patient--</option>
+                                <option value="add_new">Add New Patient</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="newPatientFields" class="row mb-3" style="display: none;">
+                        <div class="col-md-4">
+                            <input type="text" class="form-control mb-2" id="patient_name" placeholder="Patient Name" required>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="date" class="form-control mb-2" id="patient_dob" placeholder="Date of Birth" required>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control mb-2" id="patient_medical_history" placeholder="Medical History" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">General Health and Well-being</h2>
+                    <div id="patientInfoFields" style="display: none;">
+                        <div class="row mb-3">
+                            <label for="displayPatientMRN" class="form-label col-sm-3">MRN#:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="displayPatientMRN" readonly>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="displayPatientAge" class="form-label col-sm-3">Age:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="displayPatientAge" readonly>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="displayPatientMedicalHistory" class="form-label col-sm-3">Diagnosis:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="displayPatientMedicalHistory" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="feeling" class="form-label col-sm-3">How are you feeling today?</label>
+                        <div class="col-sm-9">
+                            <select id="feeling" class="form-select" name="response_feeling">
+                                <option value="Good">Good</option>
+                                <option value="Fair">Fair</option>
+                                <option value="Poor">Poor</option>
+                                <option value="Very Poor">Very Poor</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="pain" class="form-label col-sm-3">Do you have any pain? If yes, where and how severe?</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="pain" name="response_pain">
+                        </div>
+                    </div>
+
+                    <fieldset class="mb-3">
+                        <legend>Pain Level (0-10):</legend>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="pain0" name="response_pain_level" value="0">
+                                    <label class="form-check-label" for="pain0">0</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="pain1" name="response_pain_level" value="1">
+                                    <label class="form-check-label" for="pain1">1</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="pain2" name="response_pain_level" value="2">
+                                    <label class="form-check-label" for="pain2">2</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="pain3" name="response_pain_level" value="3">
+                                    <label class="form-check-label" for="pain3">3</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="pain4" name="response_pain_level" value="4">
+                                    <label class="form-check-label" for="pain4">4</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="pain5" name="response_pain_level" value="5">
+                                    <label class="form-check-label" for="pain5">5</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="pain6" name="response_pain_level" value="6">
+                                    <label class="form-check-label" for="pain6">6</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="pain7" name="response_pain_level" value="7">
+                                    <label class="form-check-label" for="pain7">7</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="pain8" name="response_pain_level" value="8">
+                                    <label class="form-check-label" for="pain8">8</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="pain9" name="response_pain_level" value="9">
+                                    <label class="form-check-label" for="pain9">9</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="pain10" name="response_pain_level" value="10">
+                                    <label class="form-check-label" for="pain10">10</label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="row mb-3">
+                        <label for="ao" class="form-label col-sm-3">A&O times 3 (Alert, Oriented to time, place and who):</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="ao" name="response_ao">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="admission_reason" class="form-label col-sm-3">Reason for Admission:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="admission_reason" name="response_admission_reason">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Chemotherapy Side Effects</h2>
+                    <div class="row mb-3">
+                        <label for="nausea" class="form-label col-sm-6">Have you experienced any nausea or vomiting today?</label>
+                        <div class="col-sm-6">
+                            <select id="nausea" class="form-select" name="response_nausea">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="fatigue" class="form-label col-sm-6">Are you experiencing any fatigue or weakness?</label>
+                        <div class="col-sm-6">
+                            <select id="fatigue" class="form-select" name="response_fatigue">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Intake and Output</h2>
+                    <div class="row mb-3">
+                        <label for="water_intake" class="form-label col-sm-6">How much water have you consumed today?</label>
+                        <div class="col-sm-6">
+                            <select id="water_intake" class="form-select" name="response_water_intake">
+                                <option value="<500ml"><500ml</option>
+                                <option value="500-1000ml">500-1000ml</option>
+                                <option value=">1000ml">>1000ml</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="bowel_movement" class="form-label col-sm-6">How many times did you have any bowel movement?</label>
+                        <div class="col-sm-6">
+                            <select id="bowel_movement" class="form-select" name="response_bowel_movement">
+                                <option value="Small">Small</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Large">Large</option>
+                            </select>
+                        </div>
+                    </div>
+    
+                    <fieldset class="mb-3">
+                        <legend>How much did you eat today? Measured in % per meal.</legend>
+                        <div class="row">
+                            <div class="col">
+                                <label>Breakfast:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="breakfast0" name="response_breakfast" value="0%">
+                                    <label class="form-check-label" for="breakfast0">0%</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="breakfast25" name="response_breakfast" value="25%">
+                                    <label class="form-check-label" for="breakfast25">25%</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="breakfast50" name="response_breakfast" value="50%">
+                                    <label class="form-check-label" for="breakfast50">50%</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="breakfast75" name="response_breakfast" value="75%">
+                                    <label class="form-check-label" for="breakfast75">75%</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="breakfast100" name="response_breakfast" value="100%">
+                                    <label class="form-check-label" for="breakfast100">100%</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Lunch:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="lunch0" name="response_lunch" value="0%">
+                                    <label class="form-check-label" for="lunch0">0%</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="lunch25" name="response_lunch" value="25%">
+                                    <label class="form-check-label" for="lunch25">25%</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="lunch50" name="response_lunch" value="50%">
+                                    <label class="form-check-label" for="lunch50">50%</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="lunch75" name="response_lunch" value="75%">
+                                    <label class="form-check-label" for="lunch75">75%</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="lunch100" name="response_lunch" value="100%">
+                                    <label class="form-check-label" for="lunch100">100%</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Dinner:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="dinner0" name="response_dinnerh" value="0%">
+                                    <label class="form-check-label" for="dinner0">0%</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="dinner25" name="response_dinner" value="25%">
+                                    <label class="form-check-label" for="dinner25">25%</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="dinner50" name="response_dinner" value="50%">
+                                    <label class="form-check-label" for="dinner50">50%</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="dinner75" name="response_dinner" value="75%">
+                                    <label class="form-check-label" for="dinner75">75%</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="dinner100" name="response_dinner" value="100%">
+                                    <label class="form-check-label" for="dinner100">100%</label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+    
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Situational and Emergency Conditions</h2>
+                    <div class="row mb-3">
+                        <label for="falls_dizziness" class="form-label col-sm-6">Have you had any falls or felt dizzy today?</label>
+                        <div class="col-sm-6">
+                            <select id="falls_dizziness" class="form-select" name="response_falls_dizziness">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                    </div>
+    
+                    <div class="row mb-3">
+                        <label for="unusual_symptoms" class="form-label col-sm-6">Are you experiencing any unusual symptoms or side effects that concern you?</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="unusual_symptoms" name="response_unusual_symptoms">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Medication Administration</h2>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="acyclovir" name="medication_Acyclovir">
+                                <label class="form-check-label" for="acyclovir">Acyclovir</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="prednisone" name="medication_Prednisone">
+                                <label class="form-check-label" for="prednisone">Prednisone</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="insulin" name="medication_Insulin">
+                                <label class="form-check-label" for="insulin">Insulin</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gabopantin" name="medication_Gabopantin">
+                                <label class="form-check-label" for="gabopantin">Gabopantin</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="neurontin" name="medication_Neurontin">
+                                <label class="form-check-label" for="neurontin">Neurontin</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="oxycodone" name="medication_Oxycodone">
+                                <label class="form-check-label" for="oxycodone">Oxycodone</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="morphine" name="medication_Morphine">
+                                <label class="form-check-label" for="morphine">Morphine</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Audio Transcriptions and Summaries</h2>
+                    <button id="generateSummaryBtn" class="btn btn-primary mt-3">Generate End of Day Summary</button>
+                    <div id="audio-transcriptions" class="border p-3 bg-white">
+                        <!-- Dynamic content will be inserted here by JavaScript -->
+                        <div id="end-of-day-summary" class="p-3 mt-3 bg-light border">
+                            <h3>End of Day Summary</h3>
+                            <p id="summaryDate" class="text-muted"></p>
+                            <p id="summaryContent">No summary available yet.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div id="shift-selection" class="mb-4">
+                <label class="form-label">Shift:</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="shift-am" name="shift" value="AM" required>
+                    <label class="form-check-label" for="shift-am">AM</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="shift-pm" name="shift" value="PM" required>
+                    <label class="form-check-label" for="shift-pm">PM</label>
+                </div>
+            </div>
+    
+            <button type="button" id="mainActionButton" class="btn btn-primary w-100">Submit Form</button>
+        </form>
+    
+        <h2 class="mt-5">Audio Recording</h2>
+        <div class="d-flex">
+            <button id="record_event_note" class="btn btn-secondary me-2">Record Event Note</button>
+            <button id="record_flow_sheet" class="btn btn-secondary">Record Flow Sheet</button>
+        </div>
+    
+        <!-- Modal for recording -->
+        <div id="recordingModal" class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="recordingTitle" class="modal-title"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <canvas id="waveform" class="mb-3"></canvas>
+                        <button id="startStop" class="record-btn btn btn-primary w-100">Start Recording</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/recording.js') }}"></script>
+</body>
+</html>
+```
